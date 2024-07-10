@@ -9,6 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {TopNavigationComponent} from "./components";
 import {LandingPageComponent} from "./components";
 import { AvatarModule } from 'primeng/avatar';
+import {CardModule} from "primeng/card";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AvatarModule } from 'primeng/avatar';
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
-    AvatarModule
+    AvatarModule,
+    CardModule
   ],
   providers: [],
   exports: [

@@ -5,8 +5,13 @@
 }
 
 .heading {
-  font-family: "Bodoni Moda SC", serif;
-  //font-optical-sizing: auto;
-  //font-weight: 500;
-  //font-style: normal;
+  font-family: "Marhey", sans-serif;
+}
+
+
+.card {
+  .p-card {
+    border-radius: 14px;
+    box-shadow: rgba(100,100, 111,0.2) 0 7px 29px 0;
+  }
 }
