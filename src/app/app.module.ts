@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import LandingPageComponent from "./components/landing-page/landing-page.component";
-// import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import {TopNavigationComponent} from "./components";
+import {LandingPageComponent} from "./components";
+import { AvatarModule } from 'primeng/avatar';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // LandingPageComponent
+    TopNavigationComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
@@ -20,9 +22,12 @@ import LandingPageComponent from "./components/landing-page/landing-page.compone
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
-    LandingPageComponent
+    AvatarModule
   ],
   providers: [],
+  exports: [
+    TopNavigationComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
