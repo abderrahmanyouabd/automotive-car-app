@@ -18,6 +18,7 @@ import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {TagModule} from "primeng/tag";
 import {DropdownModule} from "primeng/dropdown";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {DropdownModule} from "primeng/dropdown";
     FormsModule,
     CommonModule,
     TagModule,
-    DropdownModule
+    DropdownModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   exports: [
