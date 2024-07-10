@@ -3,8 +3,43 @@
     <app-top-navigation></app-top-navigation>
     <p-card class="card" styleClass="p-3">
       <ng-template pTemplate="header">
-        <h2 class="heading p-2 text-left text-blue-600">Our offerings</h2>
+        <h2 class="heading p-2 text-left text-indigo-600">What's new ?</h2>
       </ng-template>
+      <p-dataView #dv [value]="(automotives$ | async)!">
+        <ng-template pTemplate="list" let-cars>
+          <div class="grid grid-nogutter">
+            <div class="col-12" *ngFor="let car of cars; let first = first" class="col-12">
+              <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3" [ngClass]="{ 'border-top-1 surface-border': !first }">
+                <div class="md:w-10rem relative">
+                  <img class="block xl:block mx-auto border-round w-full" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + car.image" [alt]="car.modell" />
+                  <p-tag [value]="car.InStockStatus" class="absolute" severity="success" [style.left.px]="4" [style.top.px]="4" />
+                </div>
+                <div class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4">
+                  <div class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
+                    <div>
+                      <span class="font-medium text-secondary text-sm">{{ car.modell }}</span>
+                      <div class="text-lg font-medium text-900 mt-2">{{ car.brand }}</div>
+                    </div>
+                    <div class="surface-100 p-1" style="border-radius: 30px">
+                      <div class="surface-0 flex align-items-center gap-2 justify-content-center py-1 px-2" style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                        <span class="text-900 font-medium text-sm">{{ car.rating }}</span>
+                        <i class="pi pi-star-fill text-yellow-500"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-column md:align-items-end gap-5">
+                    <span class="text-xl font-semibold text-900">{{ '$' + car.price }}</span>
+                    <div class="flex flex-row-reverse md:flex-row gap-2">
+                      <p-button icon="pi pi-heart" [outlined]="true" rounded="true" />
+                      <p-button icon="pi pi-shopping-cart" rounded="true" class="flex-auto md:flex-initial white-space-nowrap" [disabled]="car.InStockStatus === 'OUT OF STOCK'" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-dataView>
     </p-card>
   </div>
 </div>
