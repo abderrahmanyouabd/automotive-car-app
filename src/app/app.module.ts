@@ -17,6 +17,7 @@ import {RatingModule} from "primeng/rating";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {TagModule} from "primeng/tag";
+import {DropdownModule} from "primeng/dropdown";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {TagModule} from "primeng/tag";
     RatingModule,
     FormsModule,
     CommonModule,
-    TagModule
+    TagModule,
+    DropdownModule
   ],
   providers: [],
   exports: [

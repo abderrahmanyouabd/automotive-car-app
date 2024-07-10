@@ -5,19 +5,24 @@
       <ng-template pTemplate="header">
         <h2 class="heading p-2 text-left text-indigo-600">What's new ?</h2>
       </ng-template>
-      <p-dataView #dv [value]="(automotives$ | async)!">
+      <p-dataView #dv [value]="(automotives$ | async)!" [sortField]="sortField" [sortOrder]="sortOrder">
+        <ng-template pTemplate="header">
+          <div class="flex flex-column md:flex-row md:justify-content-between">
+            <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="mb-2 md:mb-0"/>
+          </div>
+        </ng-template>
         <ng-template pTemplate="list" let-cars>
           <div class="grid grid-nogutter">
             <div class="col-12" *ngFor="let car of cars; let first = first" class="col-12">
               <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3" [ngClass]="{ 'border-top-1 surface-border': !first }">
                 <div class="md:w-10rem relative">
-                  <img class="block xl:block mx-auto border-round w-full" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + car.image" [alt]="car.modell" />
-                  <p-tag [value]="car.InStockStatus" class="absolute" severity="success" [style.left.px]="4" [style.top.px]="4" />
+                  <img class="block xl:block mx-auto border-round w-full" [src]="car.carImage" [alt]="car.carModel" />
+                  <p-tag [value]="car.InStockStatus?'IN STOCK':'OUT OF STOCK'" class="absolute" [severity]="car.InStockStatus?'success':'danger'" [style.left.px]="4" [style.top.px]="4" />
                 </div>
                 <div class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4">
                   <div class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
                     <div>
-                      <span class="font-medium text-secondary text-sm">{{ car.modell }}</span>
+                      <span class="font-medium text-secondary text-sm">{{ car.carModel }}</span>
                       <div class="text-lg font-medium text-900 mt-2">{{ car.brand }}</div>
                     </div>
                     <div class="surface-100 p-1" style="border-radius: 30px">
@@ -31,7 +36,7 @@
                     <span class="text-xl font-semibold text-900">{{ '$' + car.price }}</span>
                     <div class="flex flex-row-reverse md:flex-row gap-2">
                       <p-button icon="pi pi-heart" [outlined]="true" rounded="true" />
-                      <p-button icon="pi pi-shopping-cart" rounded="true" class="flex-auto md:flex-initial white-space-nowrap" [disabled]="car.InStockStatus === 'OUT OF STOCK'" />
+                      <p-button icon="pi pi-shopping-cart" rounded="true" class="flex-auto md:flex-initial white-space-nowrap" [disabled]="!car.InStockStatus"/>
                     </div>
                   </div>
                 </div>
