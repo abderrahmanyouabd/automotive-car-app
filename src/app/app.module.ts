@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {TopNavigationComponent} from "./components";
 import {LandingPageComponent} from "./components";
+import { CarListComponent } from './components';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -24,7 +25,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   declarations: [
     AppComponent,
     TopNavigationComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    CarListComponent
   ],
   imports: [
     BrowserModule,

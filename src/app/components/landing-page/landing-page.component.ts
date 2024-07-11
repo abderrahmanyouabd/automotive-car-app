@@ -1,18 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Observable, of} from "rxjs";
-import {SelectItem} from "primeng/api";
-
-type Car =  {
-  id?: number,
-  brand?: string,
-  carModel?: string,
-  price?: number,
-  rating?: number,
-  carImage?: string,
-  InStockStatus?: boolean
-}
-
-type Cars = Array<Car>;
+import {Cars} from "../../commonTypes";
 
 
 @Component({
@@ -20,39 +8,10 @@ type Cars = Array<Car>;
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss'
 })
-export default class LandingPageComponent implements OnInit{
-
-  sortKey: any;
+export default class LandingPageComponent {
 
 
-  public automotives$: Observable<Cars> = this.getCars();
-
-  sortOptions!: SelectItem[];
-
-  sortOrder!: number;
-
-  sortField!: string;
-
-
-
-  ngOnInit() {
-    this.sortOptions = [
-      { label: 'Price High to Low', value: '!price' },
-      { label: 'Price Low to High', value: 'price' }
-    ];
-  }
-
-  onSortChange(event: any) {
-    let value = event.value;
-
-    if (value.indexOf('!') === 0) {
-      this.sortOrder = -1;
-      this.sortField = value.substring(1, value.length);
-    } else {
-      this.sortOrder = 1;
-      this.sortField = value;
-    }
-  }
+  automotives$: Observable<Cars> = this.getCars();
 
   private getCars(): Observable<Cars> {
     return of([
@@ -71,4 +30,5 @@ export default class LandingPageComponent implements OnInit{
 
     ])
   }
+
 }
