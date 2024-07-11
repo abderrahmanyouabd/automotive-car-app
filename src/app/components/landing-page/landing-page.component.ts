@@ -1,6 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {Cars} from "../../commonTypes";
+import {Store} from "@ngrx/store";
+import {InitialCars} from "../../store/reducers/automotives.reducer";
+import {onLoadAutomotivesAction} from "../../store/actions/automotives.action";
+import {SelectItem} from "primeng/api";
 
 
 @Component({
@@ -8,27 +12,17 @@ import {Cars} from "../../commonTypes";
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss'
 })
-export default class LandingPageComponent {
+export default class LandingPageComponent implements OnInit{
 
 
-  automotives$: Observable<Cars> = this.getCars();
+  automotives$: Observable<Cars> = this.store.select((data) => data.a1stChaseStore.cars);
 
-  private getCars(): Observable<Cars> {
-    return of([
-      {
-        id: 1, brand: 'Bmw', carModel: 'rgx2009', price: 4000, rating: 4.3, InStockStatus: true, carImage: 'https://picsum.photos/200/200?random=1'
-      },
-      {
-        id: 2, brand: 'Hyundai', carModel: 'pml5980', price: 5000, rating: 4.5, InStockStatus: false, carImage: 'https://picsum.photos/200/200?random=2'
-      },
-      {
-        id: 3, brand: 'Peugeo', carModel: 'mpl1997', price: 4700, rating: 4.7, InStockStatus: true, carImage: 'https://picsum.photos/200/200?random=3'
-      },
-      {
-        id: 4, brand: 'Bmw', carModel: 'gbx2003', price: 3700, rating: 3.5, InStockStatus: true, carImage: 'https://picsum.photos/200/200?random=4'
-      }
 
-    ])
+  constructor(private store: Store<{a1stChaseStore: InitialCars}>) {
   }
+
+  public ngOnInit(): void {
+        this.store.dispatch(onLoadAutomotivesAction());
+    }
 
 }

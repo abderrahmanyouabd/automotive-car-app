@@ -20,6 +20,8 @@ import {CommonModule} from "@angular/common";
 import {TagModule} from "primeng/tag";
 import {DropdownModule} from "primeng/dropdown";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import AutomotivesEffects from "./store/effects/automotives.effect";
+import {automotivesReducer} from "./store/reducers/automotives.reducer";
 
 @NgModule({
   declarations: [
@@ -31,8 +33,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({a1stChaseStore: automotivesReducer}, {}),
+    EffectsModule.forRoot([AutomotivesEffects]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
     AvatarModule,
     CardModule,
@@ -43,7 +45,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     CommonModule,
     TagModule,
     DropdownModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   exports: [

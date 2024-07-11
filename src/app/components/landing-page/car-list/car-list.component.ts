@@ -18,6 +18,7 @@ export default class CarListComponent implements OnInit{
   @Input()
   public title: string | undefined;
 
+
   sortOptions!: SelectItem[];
 
   sortOrder!: number;
